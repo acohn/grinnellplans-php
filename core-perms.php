@@ -3,6 +3,7 @@ require_once ('Plans.php');
 require_once ("dbfunctions.php");
 $dbh = db_connect();
 $userid = User::id();
+if ($userid !== false) {
 $status = get_item($dbh, "status", "perms", "userid", $userid);
 $write_only_access = array('edit.php' => 1, 'index.php' => 1, 'quicklove.php' => 1, 'home.php' => 1);
 if ($status && $status == 'write-only') {
@@ -16,5 +17,6 @@ if ($status && $status == 'write-only') {
         echo "If it sounds like there's been some mistake, please email us at " . '<a href="mailto:grinnellplans@gmail.com">grinnellplans@gmail.com</a>.';
         exit(0);
     }
+}
 }
 ?>
