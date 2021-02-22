@@ -10,7 +10,7 @@ if (User::logged_in()) {
 } else {
     populate_guest_page($thispage);
 }
-$my_result = mysqli_query($dbh,"Select system.motd from system");
+$my_result = mysqli_query($dbh,"Select system.motd from `system`");
 $my_row = mysqli_fetch_array($my_result); //get information from mysql query
 // echo stripslashes(stripslashes($my_row[1])); //if logged in, show the private message
 $motd = new PlanText(stripslashes(stripslashes($my_row[0])), false); //display the main Plans message
