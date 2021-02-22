@@ -21,8 +21,8 @@ if (!User::logged_in()) {
         $mylinks = $_REQUEST['mylinks'];
         if (count($mylinks)) //if there are any links, add them
         { //if values to add
-            while (list($key, $items) = each($mylinks)) //for each link the user wants to add, do the loop
-            {
+            foreach ($mylinks as $items) {  //for each link the user wants to add, do the loop
+
                 $myrow = array($idcookie, $items); //set array to add to database
                 add_row($dbh, "opt_links", $myrow); //add new row in database
                 

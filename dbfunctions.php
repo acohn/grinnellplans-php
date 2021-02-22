@@ -25,9 +25,7 @@ function db_disconnect($dbh) {
 *Takes the row as an array that represent the different columns.
 */
 function add_row($dbh, $table, $row) {
-    while (list($key, $items) = each($row)) {
-        $row[$key] = "\"" . addslashes($items) . "\"";
-    }
+    $row = array_map(function($v) use ($dbh) { return '"'.mysqli_real_escape_string($dbh, $v).'"'; }, $row);
     $joined_row = join(',', $row);
     if (!mysqli_query($dbh, "INSERT INTO $table VALUES($joined_row)")) {
         echo "Error adding entry to $table";
